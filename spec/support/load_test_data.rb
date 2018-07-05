@@ -72,6 +72,8 @@ users = JSON.parse(File.read("#{RESOURCE_DIR}/users.json"))
 tickets = JSON.parse(File.read("#{RESOURCE_DIR}/tickets.json"))
 organizations = JSON.parse(File.read("#{RESOURCE_DIR}/organizations.json"))
 
+puts "organizations : #{organizations}"
+
 users.each { |user|
   u = Model::User.create(user)
   u.id = u['_id'] # Overwrite “_id” field values into ActiveRecord default priamry key column id

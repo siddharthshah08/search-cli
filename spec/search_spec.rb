@@ -8,7 +8,7 @@ RSpec.describe Model::Search do
   describe "#search" do
     context "Search user by _id" do
       it "returns one" do
-        expect(subject.search("users", "_id", 12)).to eq([hash[0]])
+        expect(subject.search("users", "_id", 1)).to eq([hash[0]])
       end
     end
 
