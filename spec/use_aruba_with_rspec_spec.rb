@@ -13,15 +13,6 @@ require 'spec_helper'
    #
    #   it { expect { load_cli }.to output(/Welcome to Zendesk Search/) }
    # end
-    RSpec.describe 'Check if directory and file exist', :type => :aruba do
-      let(:directory) { '../resources' }
-      let(:file) { '../resources/tickets.json' }
-      before(:each) { create_directory(directory) }
-  before(:each) { touch(file) }
-
-      it { expect(check_file_presence).to be true }
-      it { expect(exist?(file)).to be true }
-    end
 
    RSpec.describe "output.to_stdout matcher" do
      # specify { expect { load_cli }.to output(/Welcome to Zendesk Search/).to_stdout }
