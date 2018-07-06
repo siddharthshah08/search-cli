@@ -1,9 +1,9 @@
 # Instead of loading all of Rails, load the
 # particular Rails dependencies we need
-load './models/application_record.rb'
-require './models/user.rb'
-require './models/organization.rb'
-require './models/ticket.rb'
+load './searchcli/application_record.rb'
+require './searchcli/user.rb'
+require './searchcli/organization.rb'
+require './searchcli/ticket.rb'
 require 'sqlite3'
 require 'active_record'
 # Set up a database that resides in RAM
@@ -72,22 +72,20 @@ users = JSON.parse(File.read("#{RESOURCE_DIR}/users.json"))
 tickets = JSON.parse(File.read("#{RESOURCE_DIR}/tickets.json"))
 organizations = JSON.parse(File.read("#{RESOURCE_DIR}/organizations.json"))
 
-puts "organizations : #{organizations}"
-
 users.each { |user|
-  u = Model::User.create(user)
+  u = SearchCli::User.create(user)
   u.id = u['_id'] # Overwrite “_id” field values into ActiveRecord default priamry key column id
   u.save
 }
 tickets.each { |ticket|
   type = ticket['type']
   ticket.delete('type') # the column 'type' is reserved for storing the class in case of singel-table inheritance
-  t = Model::Ticket.create(ticket)
+  t = SearchCli::Ticket.create(ticket)
   t.ticket_type = type
   t.save
 }
 organizations.each { |organization|
-  org = Model::Organization.create(organization)
+  org = SearchCli::Organization.create(organization)
   org.id = org['_id'] # Overwrite “_id” field values into ActiveRecord default priamry key column id
   org.save
 }

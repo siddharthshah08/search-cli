@@ -9,7 +9,7 @@ module SearchCli
     def search(res, field, value)
       begin
         # SQLite stores true as 't' and false as 'f'
-        # so we need to change the value 
+        # so we need to change the value
         value = 't' if value == 'true'
         value = 'f' if value == 'false'
         result = []
