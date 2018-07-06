@@ -18,34 +18,8 @@ def cli_options
     command = gets.chomp
     case command
     when '1'
-        puts RESOURCE_SELECTION_MESSAGE
-        valid_option = false
-        while !valid_option
-          option = gets.chomp.to_s
-          if option == QUIT_COMMAND
-            valid_option = true
-            run = false
-          elsif VALID_SEARCH_OPTIONS.include? option
-            valid_option = true
-            puts SEARCH_FIELD_MESSAGE
-            field = gets.chomp.to_s.strip
-            if VALID_SEARCH_FIELDS[option].include? field
-              puts SEARCH_VALUE_MESSAGE
-              value = gets.chomp
-              search = SearchCli::Search.new
-              result = search.search(OBJECT_MAP[option], field, value)
-              if result.empty?
-                puts NO_RESULTS_MESSAGE
-              else
-                puts JSON.pretty_generate(result)
-              end
-              main_menu
-            end
-          else
-            puts INVALID_SELECTION_MESSAGE
-            puts RESOURCE_SELECTION_MESSAGE
-          end
-        end
+      puts RESOURCE_SELECTION_MESSAGE
+      run = perform_search
     when '2'
       VALID_SEARCH_OPTIONS.each do |op|
         puts '-------------------------------------'
@@ -57,11 +31,38 @@ def cli_options
       end
       main_menu
     when QUIT_COMMAND
-      run = false
-      return
+      run = invalid_and_exit
     else
       main_menu
       run = true
     end
   end
+end
+
+def perform_search
+  option = gets.chomp.to_s
+  if option == QUIT_COMMAND
+    return false
+  elsif VALID_SEARCH_OPTIONS.include? option
+    puts SEARCH_FIELD_MESSAGE
+    field = gets.chomp.to_s.strip
+    if VALID_SEARCH_FIELDS[option].include? field
+      puts SEARCH_VALUE_MESSAGE
+      value = gets.chomp
+      search = SearchCli::Search.new
+      result = search.search(OBJECT_MAP[option], field, value)
+      puts result.empty? ? NO_RESULTS_MESSAGE : JSON.pretty_generate(result)
+      main_menu
+      return true
+    else
+      return invalid_and_exit
+    end
+  else
+    return invalid_and_exit
+  end
+end
+
+def invalid_and_exit
+  puts INVALID_SELECTION_MESSAGE
+  return false
 end

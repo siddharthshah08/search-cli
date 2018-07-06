@@ -11,9 +11,9 @@ VALID_SEARCH_FIELDS = {
 }.freeze
 OBJECT_MAP = { '1' => 'users', '2' => 'tickets', '3' => 'organizations' }.freeze
 QUIT_COMMAND = 'quit'.freeze
-RESOURCE_SELECTION_MESSAGE = 'Select 1) Users or 2) Tickets or
-                              3) Organization for searching'.freeze
-INVALID_SELECTION_MESSAGE = 'Invalid option'.freeze
+RESOURCE_SELECTION_MESSAGE = 'Select 1) Users or 2) Tickets or '\
+                              '3) Organization for searching'.freeze
+INVALID_SELECTION_MESSAGE = 'Invalid input'.freeze
 SEARCH_FIELD_MESSAGE = 'Enter search field'.freeze
 SEARCH_VALUE_MESSAGE = 'Enter search value'.freeze
 NO_RESULTS_MESSAGE = 'No results found'.freeze
