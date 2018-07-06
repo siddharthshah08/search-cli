@@ -52,8 +52,11 @@ module SearchCli
           end
         end
         result
-      rescue Exception => e
+      rescue StandardError => e
         puts "Search failed : #{e.inspect}"
+        return []
+      rescue ActiveRecord::StatementInvalid => invalid
+        puts "Invalid search : #{invalid.inspect}"
         return []
       end
     end
