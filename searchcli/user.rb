@@ -1,4 +1,4 @@
-module Model
+module SearchCli
   # user class, for organization's users. Belongs to an organization.
   class User < ApplicationRecord
     serialize :tags # tags is an array, this will saved and retrieve as an array

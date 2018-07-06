@@ -53,7 +53,6 @@ Following output will be displayed
 ```
 [
   {
-    "id": 12,
     "_id": 12,
     "url": "http://initech.zendesk.com/api/v2/users/12.json",
     "external_id": "38899b1e-89ca-43e7-b039-e3c88525f0d2",
@@ -98,7 +97,6 @@ Similarly, for `Organization's` output object on valid search include all the us
 ```
 [
   {
-    "id": 111,
     "_id": 111,
     "external_id": "852e22ab-76dc-4d92-9a1d-02d3e04349cb",
     "url": "http://initech.zendesk.com/api/v2/organizations/111.json",
@@ -137,7 +135,6 @@ And final the output of a `Ticket` search if as follows. Contains the submitter 
 ```
 [
   {
-    "id": 20,
     "_id": "25c518a8-4bd9-435a-9442-db4202ec1da4",
     "external_id": "ff8be0f9-8b86-406e-a110-9ba1ca839850",
     "url": "http://initech.zendesk.com/api/v2/tickets/25c518a8-4bd9-435a-9442-db4202ec1da4.json",
@@ -197,6 +194,7 @@ Everytime the application is run, the data is loaded in memory and is removed on
 
 ### Assumptions and constraints
 1. Each `User` and `Ticket` will belong to an single `Organization` and `_id` is primary key on all 3 objects.
+2. Search is case sensitive
 2. “_id” fields on the JSON files corresponds to actual id field no the database, hence while populating database, “_id” field values are given to active record’s primary key field id field.
 3. Renamed `type` column as `ticket_type` for the `Ticket` attribute as `type` reserved for storing the class in case of single-table inheritance
 4. Time stamps are considered as string for simplicity

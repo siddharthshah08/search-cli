@@ -1,4 +1,4 @@
-module Model
+module SearchCli
   # ticket class, for organization's tickets. Belongs to an organization
   # sigle-table inheritance as submitter and assignee are both types of users
   class Ticket < ApplicationRecord

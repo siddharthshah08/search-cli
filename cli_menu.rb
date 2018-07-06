@@ -1,19 +1,9 @@
-VALID_SEARCH_OPTIONS = %w[1 2 3].freeze
-VALID_SEARCH_FIELDS = {
-  '1' => %w[_id url external_id name alias created_at active verified shared locale
-    timezone last_login_at email phone signature organization_id tags suspended role],
-  '2' => %w[_id url external_id created_at ticket_type subject description priority status submitter_id
-    assignee_id organization_id tags has_incidents due_at via requester_id],
-  '3' => %w[_id url external_id name domain_names created_at details shared_tickets tags]
-}.freeze
-OBJECT_MAP = { '1' => 'users', '2' => 'tickets', '3' => 'organizations' }.freeze
-QUIT_COMMAND = 'quit'.freeze
-require './models/search.rb'
 require 'json'
 require 'pp'
+require './constants.rb'
+require './searchcli/search.rb'
 
-
-def display_menu
+def main_menu
   puts "\n"
   puts "\t Select search options:"
   puts "\t * Press 1 to search Zendesk"
@@ -21,33 +11,14 @@ def display_menu
   puts "\t * Type 'quit' to exit"
 end
 
-def resource_selection
-  return 'Select 1) Users or 2) Tickets or 3) Organization for searching'
-end
-
-def invalid_selection_prompt
-  return 'Invalid option'
-end
-
-def search_field_prompt
-  return 'Enter search field'
-end
-
-def search_value_prompt
-  return 'Enter search value'
-end
-
-def no_results_alert
-  return 'No results found'
-end
 def cli_options
   run = true
-  display_menu
+  main_menu
   until !run
     command = gets.chomp
     case command
     when '1'
-        puts resource_selection
+        puts RESOURCE_SELECTION_MESSAGE
         valid_option = false
         while !valid_option
           option = gets.chomp.to_s
@@ -56,41 +27,40 @@ def cli_options
             run = false
           elsif VALID_SEARCH_OPTIONS.include? option
             valid_option = true
-            puts search_field_prompt
-            field = gets.chomp.to_s
+            puts SEARCH_FIELD_MESSAGE
+            field = gets.chomp.to_s.strip
             if VALID_SEARCH_FIELDS[option].include? field
-              puts search_value_prompt
+              puts SEARCH_VALUE_MESSAGE
               value = gets.chomp
-              search = Model::Search.new
+              search = SearchCli::Search.new
               result = search.search(OBJECT_MAP[option], field, value)
               if result.empty?
-                puts no_results_alert
-                display_menu
+                puts NO_RESULTS_MESSAGE
               else
                 puts JSON.pretty_generate(result)
-                display_menu
               end
+              main_menu
             end
           else
-            puts resource_selection
-            puts invalid_selection_prompt
+            puts INVALID_SELECTION_MESSAGE
+            puts RESOURCE_SELECTION_MESSAGE
           end
         end
     when '2'
-      VALID_SEARCH_OPTIONS.each do |option|
-        puts "-------------------------------------"
-        puts "Search for #{OBJECT_MAP[option].camelize} with"
-        VALID_SEARCH_FIELDS[option].each do |field|
-          puts "#{field} \n"
+      VALID_SEARCH_OPTIONS.each do |op|
+        puts '-------------------------------------'
+        puts "Search for #{OBJECT_MAP[op].camelize} with"
+        VALID_SEARCH_FIELDS[op].each do |f|
+          puts "#{f} \n"
         end
         puts "\n"
       end
-      display_menu
+      main_menu
     when QUIT_COMMAND
       run = false
       return
     else
-      display_menu
+      main_menu
       run = true
     end
   end
