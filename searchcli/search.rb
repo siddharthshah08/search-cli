@@ -15,6 +15,8 @@ module SearchCli
         result = []
         case res
         when 'users'
+          # the below line can be canged to accept LIKE comparision for
+          # partial string search
           records = User.where("#{field} = ? ", value)
           records.each do |record|
             sub_object = {

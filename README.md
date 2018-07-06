@@ -194,7 +194,7 @@ Everytime the application is run, the data is loaded in memory and is removed on
 
 ### Assumptions and constraints
 1. Each `User` and `Ticket` will belong to an single `Organization` and `_id` is primary key on all 3 objects.
-2. Search is case sensitive
+2. Search is case sensitive and for string is expected to match the field value exactly.
 2. “_id” fields on the JSON files corresponds to actual id field no the database, hence while populating database, “_id” field values are given to active record’s primary key field id field.
 3. Renamed `type` column as `ticket_type` for the `Ticket` attribute as `type` reserved for storing the class in case of single-table inheritance
 4. Time stamps are considered as string for simplicity

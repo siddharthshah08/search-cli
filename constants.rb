@@ -5,7 +5,7 @@ VALID_SEARCH_FIELDS = {
             organization_id tags suspended role],
   '2' => %w[_id url external_id created_at ticket_type subject description
             priority status submitter_id assignee_id organization_id tags
-            has_incidents due_at via requester_id],
+            has_incidents due_at via],
   '3' => %w[_id url external_id name domain_names created_at details
             shared_tickets tags]
 }.freeze
