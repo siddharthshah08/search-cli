@@ -31,7 +31,7 @@ def cli_options
       end
       main_menu
     when QUIT_COMMAND
-      run = invalid_and_exit
+      run = false
     else
       main_menu
       run = true

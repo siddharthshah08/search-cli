@@ -67,7 +67,7 @@ require 'active_record'
       t.text     'tags'
     end
   end
-RESOURCE_DIR = './resources'
+RESOURCE_DIR = './data'
 users = JSON.parse(File.read("#{RESOURCE_DIR}/users.json"))
 tickets = JSON.parse(File.read("#{RESOURCE_DIR}/tickets.json"))
 organizations = JSON.parse(File.read("#{RESOURCE_DIR}/organizations.json"))

@@ -7,7 +7,7 @@ require './searchcli/application_record.rb'
 require './searchcli/user.rb'
 require './searchcli/organization.rb'
 require './searchcli/ticket.rb'
-RESOURCE_DIR = './resources'.freeze
+RESOURCE_DIR = './data'.freeze
       # Set up a database that resides in RAM
       ActiveRecord::Base.establish_connection(
         adapter: 'sqlite3',
