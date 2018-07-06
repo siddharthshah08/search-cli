@@ -163,6 +163,64 @@ And final the output of a `Ticket` search if as follows. Contains the submitter 
 ]
 ```
 
+When `2` is provided as input for the we get list of searchable fields as below
+
+```
+-------------------------------------
+Search for Users with
+_id
+url
+external_id
+name
+alias
+created_at
+active
+verified
+shared
+locale
+timezone
+last_login_at
+email
+phone
+signature
+organization_id
+tags
+suspended
+role
+
+-------------------------------------
+Search for Tickets with
+_id
+url
+external_id
+created_at
+ticket_type
+subject
+description
+priority
+status
+submitter_id
+assignee_id
+organization_id
+tags
+has_incidents
+due_at
+via
+
+-------------------------------------
+Search for Organizations with
+_id
+url
+external_id
+name
+domain_names
+created_at
+details
+shared_tickets
+tags
+
+```
+
 In case the search does not result any results following message displays on the console.
 ```
 No results found
@@ -180,7 +238,7 @@ Organization - `has_many` users, `has_many` tickets
 User - `belongs_to` an organization
 Ticker - `belongs_to` an organization and has a `submitter` and `assignee` `user` (Single table inheritance on User table.)
 
-The application starts by running the `runner.rb` file. This file creates the tables and loads data in the objects. `sqlite's` inmemory database is used as database for the application
+The application starts by running the `runner.rb` file. This file creates the tables and loads data in the objects. `sqlite's` in memory database is used as database for the application. Data for these active record models is loaded from json filed in `/data` directory.
 
 ```
 ActiveRecord::Base.establish_connection(
@@ -202,6 +260,8 @@ Everytime the application is run, the data is loaded in memory and is removed on
 
 ### Built With
 ```
-ruby - 2.3.3
-sqlite - 3.6.16
+sqlite (3.6.16) for database
+rubocop (0.57.2) of linting and static analysis
+rspec (3.7.0) for writing tests
+
 ```
