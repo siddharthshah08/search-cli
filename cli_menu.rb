@@ -22,7 +22,7 @@ def display_menu
 end
 
 def resource_selection
-  return 'Select 1) Users or 2) Tickets or 3) Organization'
+  return 'Select 1) Users or 2) Tickets or 3) Organization for searching'
 end
 
 def invalid_selection_prompt

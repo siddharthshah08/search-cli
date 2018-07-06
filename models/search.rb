@@ -29,8 +29,8 @@ module Model
         records = Organization.where("#{field} = ? ", value)
         records.each do |record|
           sub_object = {
-            'users' => record.users.map { |u| { 'name' => u.name } },
-            'tickets' => record.tickets.map { |t| { 'subject' => t.subject } }
+            'users' => record.users.map(&:name),
+            'tickets' => record.tickets.map(&:subject)
           }
           merged = record.attributes.merge sub_object
           result << merged
